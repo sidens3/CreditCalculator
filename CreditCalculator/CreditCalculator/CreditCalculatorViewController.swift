@@ -41,16 +41,11 @@ class CreditCalculatorViewController: UIViewController {
         return view
     }()
     
-    private let textFieldsStackView: UIStackView = {
-        let stackView = UIStackView(frame: .zero)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.backgroundColor = .clear
-        stackView.axis = .vertical
-        stackView.spacing = 10.0
-        stackView.alignment = .leading
-        stackView.distribution = .fillEqually
-        
-        return stackView
+    private let textFieldsView: UIView = {
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        return view
     }()
     
     ///rate elements
@@ -131,7 +126,7 @@ class CreditCalculatorViewController: UIViewController {
     private let periodLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = Constants.creditBodyLabelTitle
+        label.text = Constants.periodLabelTitle
         label.textColor = .darkText
         label.textAlignment = .left
         label.font = Constants.textLabelFont
@@ -192,12 +187,12 @@ class CreditCalculatorViewController: UIViewController {
         self.view.addSubview(containerView)
         self.view.addSubview(computeButton)
         
-        containerView.addSubview(textFieldsStackView)
+        containerView.addSubview(textFieldsView)
         containerView.addSubview(creditTypeStackView)
         
-        textFieldsStackView.addSubview(creditBodyStackView)
-        textFieldsStackView.addSubview(rateStackView)
-        textFieldsStackView.addSubview(periodStackView)
+        textFieldsView.addSubview(creditBodyStackView)
+        textFieldsView.addSubview(rateStackView)
+        textFieldsView.addSubview(periodStackView)
         
         creditTypeStackView.addArrangedSubview(creditTypeLabel)
         creditTypeStackView.addArrangedSubview(creditTypeSegmentedControl)
@@ -219,31 +214,31 @@ class CreditCalculatorViewController: UIViewController {
             computeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             computeButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             
-            textFieldsStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
-            textFieldsStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 10),
-            textFieldsStackView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            textFieldsStackView.bottomAnchor.constraint(equalTo: creditTypeStackView.topAnchor),
+            textFieldsView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
+            textFieldsView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 10),
+            textFieldsView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            textFieldsView.bottomAnchor.constraint(equalTo: creditTypeStackView.topAnchor),
             
             creditTypeStackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
             creditTypeStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 10),
-//            creditTypeStackView.topAnchor.constraint(equalTo: textFieldsStackView.topAnchor, constant: 5),
             creditTypeStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -50)
         ])
         
         
-        //constraints for textFieldsStackView elements
-//        NSLayoutConstraint.activate([
-//            creditBodyStackView.leadingAnchor.constraint(equalTo: textFieldsStackView.leadingAnchor),
-//            creditBodyStackView.trailingAnchor.constraint(equalTo: textFieldsStackView.trailingAnchor),
-//            creditBodyStackView.topAnchor.constraint(equalTo: textFieldsStackView.topAnchor, constant: 5),
-//
-//            rateStackView.leadingAnchor.constraint(equalTo: textFieldsStackView.leadingAnchor),
-//            rateStackView.trailingAnchor.constraint(equalTo: textFieldsStackView.trailingAnchor),
-//            rateStackView.topAnchor.constraint(equalTo: creditBodyStackView.topAnchor, constant: 5),
-//
-//            periodStackView.leadingAnchor.constraint(equalTo: textFieldsStackView.leadingAnchor),
-//            periodStackView.trailingAnchor.constraint(equalTo: textFieldsStackView.trailingAnchor),
-//            periodStackView.topAnchor.constraint(equalTo: rateStackView.topAnchor, constant: 5)
-//        ])
+        //constraints for textFieldsView elements
+        NSLayoutConstraint.activate([
+            creditBodyStackView.leadingAnchor.constraint(equalTo: textFieldsView.leadingAnchor),
+            creditBodyStackView.trailingAnchor.constraint(equalTo: textFieldsView.trailingAnchor),
+            creditBodyStackView.topAnchor.constraint(equalTo: textFieldsView.topAnchor, constant: 5),
+            creditBodyStackView.bottomAnchor.constraint(equalTo: rateStackView.topAnchor, constant: -15),
+            
+            rateStackView.leadingAnchor.constraint(equalTo: textFieldsView.leadingAnchor),
+            rateStackView.trailingAnchor.constraint(equalTo: textFieldsView.trailingAnchor),
+            rateStackView.bottomAnchor.constraint(equalTo: periodStackView.topAnchor, constant: -15),
+
+            periodStackView.leadingAnchor.constraint(equalTo: textFieldsView.leadingAnchor),
+            periodStackView.trailingAnchor.constraint(equalTo: textFieldsView.trailingAnchor),
+            periodStackView.bottomAnchor.constraint(lessThanOrEqualTo: textFieldsView.bottomAnchor, constant: -15)
+        ])
     }
 }
