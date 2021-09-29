@@ -1,4 +1,4 @@
 # CreditCalculator
 
 Swift, UIKit.
-Верствка из кода
+Верстка из кода
